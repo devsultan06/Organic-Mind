@@ -18,7 +18,7 @@ const Auth: React.FC = () => {
 
     const location = useLocation();
 
-    const isRegister = useSelector((state: RootState) => state.user.register);
+        const isRegister = useSelector((state: RootState) => state.user.register);
 
 
     useEffect(() => {

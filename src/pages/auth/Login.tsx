@@ -1,13 +1,35 @@
 import { Button } from "@material-tailwind/react";
 import { TextField } from "@mui/material";
+import { useFormik } from "formik";
+import { loginSchema } from "../../schemas/schema";
 
 const Login = () => {
+  const {
+    values,
+    errors,
+    touched,
+    handleChange,
+    handleBlur,
+    resetForm,
+    handleSubmit
+  } = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+
+    },
+    validationSchema: loginSchema,
+    onSubmit: (values) => {
+      console.log("Form submitted with values:", values);
+      resetForm(); 
+    },
+  });
   return (
     <div className="w-full max-w-[500px] flex flex-col items-start ">
       <h1 className="mb-6 font-bold text-[32px] text-center text-gray-800">
         Login
       </h1>
-      <form className="w-full">
+      <form className="w-full" onClick={handleSubmit}>
         {/* Email Input */}
         <div className="mb-4" >
           <TextField
@@ -16,8 +38,12 @@ const Login = () => {
             type="email"
             variant="outlined"
             fullWidth
-            required
             placeholder="Enter your email"
+            value={values.email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={touched.email && Boolean(errors.email)}
+            helperText={touched.email && errors.email}
             sx={{
               "& .MuiOutlinedInput-root": {
                 "&.Mui-focused fieldset": {
@@ -39,8 +65,12 @@ const Login = () => {
             type="password"
             variant="outlined"
             fullWidth
-            required
             placeholder="Enter your password"
+            value={values.password}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={touched.password && Boolean(errors.password)}
+            helperText={touched.password && errors.password}
             sx={{
               "& .MuiOutlinedInput-root": {
                 "&.Mui-focused fieldset": {
