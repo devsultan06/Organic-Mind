@@ -4,9 +4,8 @@ import { registerSchema } from "../../schemas/schema";
 import { useFormik } from "formik";
 import { useRef, useState } from "react";
 import useRegister from "./hooks/useRegister";
-import { Audio, RotatingLines } from "react-loader-spinner";
-
-
+import { Audio } from "react-loader-spinner";
+import AlertModal from "./components/AlertModal";
 
 type Register = {
   username: string;
@@ -15,13 +14,12 @@ type Register = {
   profilePicture: File | null;
 };
 
-
 const Register = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const profilePictureInputRef = useRef<HTMLInputElement | null>(null);
-  const [message, setMessage] = useState({ message: "", type: "" });
-
-  const handleSetMessage = (message: string, type: string) => {
+  const [message, setMessage] = useState<{ message: string; type: "success" | "error" }>({ message: "", type: "success" });
+  
+  const handleSetMessage = (message: string, type: "success" | "error") => {
     setMessage({ message, type });
   };
 
@@ -54,19 +52,14 @@ const Register = () => {
         username: trimmedValues.nickName,
         email: trimmedValues.email,
         password: trimmedValues.password,
+        profilePicture: values.profilePicture, 
         setLoading,
       });
 
-      // console.log("Form submitted with values:", trimmedValues);
-      // resetForm(); // Optional: Reset the form after submission
-      // if (profilePictureInputRef.current) {
-      //   profilePictureInputRef.current.value = ""; // Manually clear the file input
-      // }
     },
   });
 
-  const register = useRegister(handleSetMessage, resetForm, setFieldValue);
-
+  const register = useRegister({ handleSetMessage, resetForm, setFieldValue, profilePictureInputRef });
 
 
   return (
@@ -74,7 +67,12 @@ const Register = () => {
       <h1 className="mb-6 font-bold text-[32px] text-center text-gray-800">
         Sign Up
       </h1>
-      <form className="w-full" onSubmit={handleSubmit}>
+
+      <AlertModal
+       message={message.message}
+        type={message.type}
+      />
+      <form className="w-full mt-3" onSubmit={handleSubmit} >
 
         <div className="mb-4">
           <TextField
@@ -92,17 +90,16 @@ const Register = () => {
             sx={{
               "& .MuiOutlinedInput-root": {
                 "&.Mui-focused fieldset": {
-                  borderColor: "#FFD700", // Yellow color
+                  borderColor: "#FFD700", 
                 },
               },
               "& .MuiInputLabel-root.Mui-focused": {
-                color: "#FFD700", // Yellow color for label
+                color: "#FFD700", 
               },
             }}
           />
         </div>
 
-        {/* Email Input */}
         <div className="mb-4" >
           <TextField
             id="email"
@@ -119,17 +116,16 @@ const Register = () => {
             sx={{
               "& .MuiOutlinedInput-root": {
                 "&.Mui-focused fieldset": {
-                  borderColor: "#FFD700", // Yellow color
+                  borderColor: "#FFD700",
                 },
               },
               "& .MuiInputLabel-root.Mui-focused": {
-                color: "#FFD700", // Yellow color for label
+                color: "#FFD700", 
               },
             }}
           />
         </div>
 
-        {/* Password Input */}
         <div className="mb-6">
           <TextField
             id="password"
@@ -146,11 +142,11 @@ const Register = () => {
             sx={{
               "& .MuiOutlinedInput-root": {
                 "&.Mui-focused fieldset": {
-                  borderColor: "#FFD700", // Yellow color
+                  borderColor: "#FFD700", 
                 },
               },
               "& .MuiInputLabel-root.Mui-focused": {
-                color: "#FFD700", // Yellow color for label
+                color: "#FFD700", 
               },
             }}
           />
@@ -165,7 +161,7 @@ const Register = () => {
             name="profilePicture"
             type="file"
             accept="image/*"
-            ref={profilePictureInputRef} // Attach the ref here
+            ref={profilePictureInputRef}
             onChange={(event) => {
               const file = event.currentTarget.files
                 ? event.currentTarget.files[0]
@@ -179,7 +175,6 @@ const Register = () => {
           )}
         </div>
 
-        {/* Sign In Button */}
         <Button
           type="submit"
           variant="text"
@@ -190,15 +185,18 @@ const Register = () => {
 
 
       </form>
-      <Audio
-        height="100"
-        width="100"
-        color="#4fa94d"
-        ariaLabel="audio-loading"
-        wrapperStyle={{}}
-        wrapperClass="wrapper-class"
-        visible={true}
-      />
+      {loading && (
+        <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50">
+          <Audio
+            height="100"
+            width="100"
+            color="#FFD700"
+            ariaLabel="audio-loading"
+            wrapperClass="wrapper-class"
+            visible={true}
+          />
+        </div>
+      )}
     </div>
   );
 };

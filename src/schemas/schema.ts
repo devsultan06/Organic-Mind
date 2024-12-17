@@ -1,13 +1,12 @@
 import * as Yup from "yup";
 
-// Define password rules as a regular expression
 const passwordRules = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/;
 
 // Validation schema for registration
 export const registerSchema = Yup.object().shape({
-  nickName: Yup.string()
-    .required("Nickname is required")
-    .min(3, "Nickname must be at least 3 characters"),
+  username: Yup.string()
+    .required("Username is required")
+    .min(3, "Username must be at least 3 characters"),
   email: Yup.string()
     .email("Please enter a valid email")
     .required("Email is required"),

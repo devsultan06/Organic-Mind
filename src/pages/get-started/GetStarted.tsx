@@ -33,7 +33,7 @@ export const GetStarted: React.FC = () => {
 
             <CustomCardBody >
                 <div className="w-full max-w-[500px] flex flex-col items-start">
-                    <h1 className="mb-4 font-bold text-[40px] text-left w-full">
+                    <h1 className="mb-4 font-bold text-[40px] text-black text-left w-full">
                         Productive Mind
                     </h1>
                     <Typography color="gray" className="mb-8 font-normal text-left w-full">
@@ -49,7 +49,7 @@ export const GetStarted: React.FC = () => {
                 </div>
                 <button
                     onClick={handleLoginClick}
-                    className="mt-4 text-blue-500 hover:underline"
+                    className="mt-4 underline text-black"
                 >
                     Already have an account? Login
                 </button>
