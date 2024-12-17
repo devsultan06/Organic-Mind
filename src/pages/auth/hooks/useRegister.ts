@@ -29,7 +29,6 @@ interface UseRegisterParams {
     profilePictureInputRef: React.RefObject<HTMLInputElement>;
 }
 
-
 const useRegister = ({ handleSetMessage, resetForm, setFieldValue, profilePictureInputRef }: UseRegisterParams) => {
     const navigate = useNavigate(); 
     const register = async ({ username, email, password, profilePicture, setLoading }: RegisterParams) => {

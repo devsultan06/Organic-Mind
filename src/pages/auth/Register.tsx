@@ -61,7 +61,6 @@ const Register = () => {
 
   const register = useRegister({ handleSetMessage, resetForm, setFieldValue, profilePictureInputRef });
 
-
   return (
     <div className="w-full max-w-[500px] flex flex-col items-start ">
       <h1 className="mb-6 font-bold text-[32px] text-center text-gray-800">

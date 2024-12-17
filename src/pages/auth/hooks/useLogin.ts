@@ -7,7 +7,6 @@ import { auth } from "../../../firebase/config/firebase.js";
 type HandleSetMessage = (message: string, type: "success" | "error") => void;
 type ResetForm = (values: { [key: string]: string }) => void;
 
-
 type RegisterParams = {
     email: string;
     password: string;

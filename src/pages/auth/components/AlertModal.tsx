@@ -3,7 +3,6 @@ import { useEffect, useRef } from "react";
 import Alert from "@mui/material/Alert";
 import gsap from "gsap";
 
-
 type AlertModalProps = {
   message: string;
   type: "error" | "success";
@@ -26,8 +25,6 @@ const AlertModal = ({ message, type }: AlertModalProps) => {
     }
 
   }, [message]); 
-
-
 
   if (!message) return null; 
 
