@@ -18,7 +18,7 @@ type RegisterParams = {
     username: string;
     email: string;
     password: string;
-    profilePicture: File | null; 
+    profilePicture: File | null;
     setLoading: React.Dispatch<React.SetStateAction<boolean>>
 };
 
@@ -30,7 +30,7 @@ interface UseRegisterParams {
 }
 
 const useRegister = ({ handleSetMessage, resetForm, setFieldValue, profilePictureInputRef }: UseRegisterParams) => {
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
     const register = async ({ username, email, password, profilePicture, setLoading }: RegisterParams) => {
         setLoading(true);
         handleSetMessage("", "success");
@@ -49,7 +49,10 @@ const useRegister = ({ handleSetMessage, resetForm, setFieldValue, profilePictur
             if (profilePicture) {
                 const formData = new FormData();
                 formData.append("file", profilePicture);
-                formData.append("upload_preset", "organic-mind"); 
+                formData.append("upload_preset", "organic-mind");
+
+                const userUid = user.uid; 
+                formData.append("folder", `user_profiles/${userUid}`); 
 
                 try {
                     const cloudinaryResponse = await axios.post(
@@ -67,7 +70,7 @@ const useRegister = ({ handleSetMessage, resetForm, setFieldValue, profilePictur
                 } catch (error) {
                     console.error("Cloudinary upload failed: ", error);
                     handleSetMessage("Failed to upload profile picture. Please try again.", "error");
-                    return; 
+                    return;
                 }
             }
 
@@ -79,17 +82,17 @@ const useRegister = ({ handleSetMessage, resetForm, setFieldValue, profilePictur
             });
 
             handleSetMessage(
-                "Registration Successful. Redirecting...", 
+                "Registration Successful. Redirecting...",
                 "success",
             );
 
             console.log("Successful")
             resetForm({ nickName: "", email: "", password: "" });
             if (profilePictureInputRef.current) {
-                profilePictureInputRef.current.value = ""; 
+                profilePictureInputRef.current.value = "";
             }
             setTimeout(() => {
-                navigate("/get-started/login"); 
+                navigate("/get-started/login");
             }, 3000);
         } catch (error: any) {
             let errorMessage = "An unexpected error occurred. Please try again.";
