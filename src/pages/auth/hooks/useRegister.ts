@@ -7,6 +7,7 @@ import { auth, db } from "../../../firebase/config/firebase";
 import { doc, setDoc } from "firebase/firestore";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { formatDate } from "../../../utils/dateUtils";
 
 
 type HandleSetMessage = (message: string, type: "success" | "error") => void;
@@ -51,8 +52,8 @@ const useRegister = ({ handleSetMessage, resetForm, setFieldValue, profilePictur
                 formData.append("file", profilePicture);
                 formData.append("upload_preset", "organic-mind");
 
-                const userUid = user.uid; 
-                formData.append("folder", `user_profiles/${userUid}`); 
+                const userUid = user.uid;
+                formData.append("folder", `user_profiles/${userUid}`);
 
                 try {
                     const cloudinaryResponse = await axios.post(
@@ -65,7 +66,6 @@ const useRegister = ({ handleSetMessage, resetForm, setFieldValue, profilePictur
                         }
                     );
                     console.log("Cloudinary upload successful!");
-                    console.log(cloudinaryResponse)
                     photoURL = cloudinaryResponse.data.secure_url; // Cloudinary URL of the uploaded image
                 } catch (error) {
                     console.error("Cloudinary upload failed: ", error);
@@ -74,11 +74,15 @@ const useRegister = ({ handleSetMessage, resetForm, setFieldValue, profilePictur
                 }
             }
 
+            const currentDate = new Date();
+            const formattedDate = formatDate(currentDate);
 
             await setDoc(doc(db, "users", user.uid), {
                 email: user.email,
                 username: user.displayName,
                 photoURL: photoURL,
+                provider: "email/password",
+                createdAt: formattedDate,
             });
 
             handleSetMessage(

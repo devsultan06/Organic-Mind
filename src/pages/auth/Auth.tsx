@@ -60,7 +60,7 @@ const Auth: React.FC = () => {
                     {isRegister ? <Register /> : <Login />}
                 </div>
                 <div style={{ marginTop: "20px", textAlign: "center" }}>
-                    <button onClick={toggleAuth} className="hover:underline">
+                    <button onClick={toggleAuth} className="underline">
                         {isRegister ? "Already have an account? Login" : "Don't have an account? Register"}
                     </button>
                 </div>

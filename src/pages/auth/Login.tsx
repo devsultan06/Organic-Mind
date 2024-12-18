@@ -6,14 +6,59 @@ import useLogin from "./hooks/useLogin";
 import { useState } from "react";
 import AlertModal from "./components/AlertModal";
 import { Audio } from "react-loader-spinner";
+import { signInWithPopup } from "firebase/auth";
+import { auth, googleProvider, githubProvider, db } from "../../firebase/config/firebase";
+import { useNavigate } from "react-router-dom";
+import { doc, setDoc } from "firebase/firestore";
+import { formatDate } from "../../utils/dateUtils";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(false);
   const [message, setMessage] = useState<{ message: string; type: "success" | "error" }>({ message: "", type: "success" });
 
   const handleSetMessage = (message: string, type: "success" | "error") => {
     setMessage({ message, type });
   };
+  const handleOAuthLogin = async (provider: any) => {
+    setLoading(true);
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      const providerUsed = provider.providerId; // e.g., "google.com" or "github.com"
+      console.log(user);
+
+      const currentDate = new Date();
+      const formattedDate = formatDate(currentDate);
+
+      await setDoc(doc(db, "users", user.uid), {
+        username: user.displayName,
+        photoURL: user.photoURL,
+        provider: providerUsed,
+        createdAt: formattedDate,
+      });
+
+      handleSetMessage(
+        "Registration Successful. Redirecting...",
+        "success",
+      );
+
+      console.log("Successful");
+
+      resetForm();
+
+      setTimeout(() => {
+        navigate("/home");
+      }, 3000);
+
+    } catch (error: any) {
+      setMessage({ message: error.message, type: "error" });
+    } finally {
+      setLoading(false);
+    }
+  };
+
 
   const {
     values,
@@ -43,7 +88,7 @@ const Login = () => {
     },
   });
 
-  const login= useLogin({ handleSetMessage, resetForm });
+  const login = useLogin({ handleSetMessage, resetForm });
 
 
   return (
@@ -77,7 +122,8 @@ const Login = () => {
                 },
               },
               "& .MuiInputLabel-root.Mui-focused": {
-                color: "#FFD700",               },
+                color: "#FFD700",
+              },
             }}
           />
         </div>
@@ -98,11 +144,11 @@ const Login = () => {
             sx={{
               "& .MuiOutlinedInput-root": {
                 "&.Mui-focused fieldset": {
-                  borderColor: "#FFD700", 
+                  borderColor: "#FFD700",
                 },
               },
               "& .MuiInputLabel-root.Mui-focused": {
-                color: "#FFD700", 
+                color: "#FFD700",
               },
             }}
           />
@@ -116,6 +162,32 @@ const Login = () => {
           Login
         </Button>
       </form>
+
+
+      {/* OR Separator */}
+      <div className="flex items-center my-6 w-full">
+        <div className="flex-1 border-t border-gray-300"></div>
+        <span className="mx-4 text-gray-600 text-sm font-medium">OR</span>
+        <div className="flex-1 border-t border-gray-300"></div>
+      </div>
+
+      {/* Social Sign-In Buttons */}
+      <div className="w-full flex flex-row items-center justify-between">
+        <Button
+          onClick={() => handleOAuthLogin(githubProvider)}
+          variant="outlined"
+          className=" text-black bg-white2 px-[20px] py-[10px] border-gray-400 hover:bg-yellow gap-2 capitalize"
+        >
+          Github
+        </Button>
+        <Button
+          onClick={() => handleOAuthLogin(googleProvider)}
+          variant="outlined"
+          className=" text-black bg-white2 px-[20px] py-[10px] border-gray-400 hover:bg-yellow gap-2 capitalize"
+        >
+          Google
+        </Button>
+      </div>
 
       {loading && (
         <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50">

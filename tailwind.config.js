@@ -6,6 +6,7 @@ export default {
       colors: {
         yellow: "#FFD43A",
         darkblack: "#111111",
+        white2: "#ebebeb",
       },
     },
   },
