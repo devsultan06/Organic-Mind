@@ -20,6 +20,7 @@ const Login = () => {
   const handleSetMessage = (message: string, type: "success" | "error") => {
     setMessage({ message, type });
   };
+
   const handleOAuthLogin = async (provider: any) => {
     setLoading(true);
     try {
@@ -163,27 +164,24 @@ const Login = () => {
         </Button>
       </form>
 
-
-      {/* OR Separator */}
       <div className="flex items-center my-6 w-full">
         <div className="flex-1 border-t border-gray-300"></div>
         <span className="mx-4 text-gray-600 text-sm font-medium">OR</span>
         <div className="flex-1 border-t border-gray-300"></div>
       </div>
 
-      {/* Social Sign-In Buttons */}
-      <div className="w-full flex flex-row items-center justify-between">
+      <div className="w-full block md:flex md:flex-row items-center justify-between gap-9">
         <Button
           onClick={() => handleOAuthLogin(githubProvider)}
           variant="outlined"
-          className=" text-black bg-white2 px-[20px] py-[10px] border-gray-400 hover:bg-yellow gap-2 capitalize"
+          className=" text-black w-full bg-white2 px-[80px] py-[10px] border-gray-400 hover:bg-yellow gap-2 capitalize mb-[20px] md:mb-[0px]"
         >
           Github
         </Button>
         <Button
           onClick={() => handleOAuthLogin(googleProvider)}
           variant="outlined"
-          className=" text-black bg-white2 px-[20px] py-[10px] border-gray-400 hover:bg-yellow gap-2 capitalize"
+          className=" text-black w-full bg-white2 px-[80px] py-[10px] border-gray-400 hover:bg-yellow gap-2 capitalize"
         >
           Google
         </Button>

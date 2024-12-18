@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import Login from "./Login";
 import Register from "./Register";
-import { setRegisterState } from "../../store/slices/userSlice";
+import { setRegisterState } from "../../store/slices/authSlice";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { RootState } from "../../types/stateTypes";
@@ -18,7 +18,7 @@ const Auth: React.FC = () => {
 
     const location = useLocation();
 
-        const isRegister = useSelector((state: RootState) => state.user.register);
+    const isRegister = useSelector((state: RootState) => state.auth.register);
 
 
     useEffect(() => {

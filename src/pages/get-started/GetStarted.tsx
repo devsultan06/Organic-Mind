@@ -9,7 +9,7 @@ import {
 } from "@material-tailwind/react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setRegisterState } from "../../store/slices/userSlice";
+import { setRegisterState } from "../../store/slices/authSlice";
 import CustomCard from "../../components/layout/CustomCard";
 import CustomCardBody from "../../components/layout/CustomCardBody";
 

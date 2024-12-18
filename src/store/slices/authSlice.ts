@@ -1,15 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface UserState {
+interface authState {
   register: boolean;
 }
 
-const initialState: UserState = {
+const initialState: authState = {
   register: false, 
 };
 
-const userSlice = createSlice({
-  name: "user",
+const authSlice = createSlice({
+  name: "auth",
   initialState,
   reducers: {
     setRegisterState: (state, action: PayloadAction<boolean>) => {
@@ -18,5 +18,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { setRegisterState } = userSlice.actions;
-export default userSlice.reducer;
+export const { setRegisterState } = authSlice.actions;
+export default authSlice.reducer;
