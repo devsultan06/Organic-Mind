@@ -14,14 +14,16 @@ type Register = {
   profilePicture: File | null;
 };
 
-const Register = () => {
+type HandleSetMessage = (message: string, type: "success" | "error") => void;
+
+
+interface UseRegisterParams {
+  handleSetMessage: HandleSetMessage;
+  message: any
+}
+const Register = ({ handleSetMessage, message }: UseRegisterParams) => {
   const [loading, setLoading] = useState<boolean>(false);
   const profilePictureInputRef = useRef<HTMLInputElement | null>(null);
-  const [message, setMessage] = useState<{ message: string; type: "success" | "error" }>({ message: "", type: "success" });
-  
-  const handleSetMessage = (message: string, type: "success" | "error") => {
-    setMessage({ message, type });
-  };
 
 
   const {
@@ -52,7 +54,7 @@ const Register = () => {
         username: trimmedValues.nickName,
         email: trimmedValues.email,
         password: trimmedValues.password,
-        profilePicture: values.profilePicture, 
+        profilePicture: values.profilePicture,
         setLoading,
       });
 
@@ -68,7 +70,7 @@ const Register = () => {
       </h1>
 
       <AlertModal
-       message={message.message}
+        message={message.message}
         type={message.type}
       />
       <form className="w-full mt-3" onSubmit={handleSubmit} >
@@ -89,11 +91,11 @@ const Register = () => {
             sx={{
               "& .MuiOutlinedInput-root": {
                 "&.Mui-focused fieldset": {
-                  borderColor: "#FFD700", 
+                  borderColor: "#FFD700",
                 },
               },
               "& .MuiInputLabel-root.Mui-focused": {
-                color: "#FFD700", 
+                color: "#FFD700",
               },
             }}
           />
@@ -119,7 +121,7 @@ const Register = () => {
                 },
               },
               "& .MuiInputLabel-root.Mui-focused": {
-                color: "#FFD700", 
+                color: "#FFD700",
               },
             }}
           />
@@ -141,11 +143,11 @@ const Register = () => {
             sx={{
               "& .MuiOutlinedInput-root": {
                 "&.Mui-focused fieldset": {
-                  borderColor: "#FFD700", 
+                  borderColor: "#FFD700",
                 },
               },
               "& .MuiInputLabel-root.Mui-focused": {
-                color: "#FFD700", 
+                color: "#FFD700",
               },
             }}
           />

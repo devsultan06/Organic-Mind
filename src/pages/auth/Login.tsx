@@ -8,15 +8,15 @@ import AlertModal from "./components/AlertModal";
 import { Audio } from "react-loader-spinner";
 import { googleProvider, githubProvider } from "../../firebase/config/firebase";
 import useAuthLogin from "./hooks/useAuthLogin";
+type HandleSetMessage = (message: string, type: "success" | "error") => void;
 
-const Login = () => {
+
+interface UseLoginParams {
+  handleSetMessage: HandleSetMessage;
+  message: any
+}
+const Login = ({ handleSetMessage, message }: UseLoginParams) => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [message, setMessage] = useState<{ message: string; type: "success" | "error" }>({ message: "", type: "success" });
-
-  const handleSetMessage = (message: string, type: "success" | "error") => {
-    setMessage({ message, type });
-  };
-
   const {
     values,
     errors,
@@ -47,7 +47,7 @@ const Login = () => {
 
   const login = useLogin({ handleSetMessage, resetForm });
 
-  const handleOAuthLogin = useAuthLogin({ handleSetMessage, resetForm});
+  const handleOAuthLogin = useAuthLogin({ handleSetMessage, resetForm });
 
 
   return (
@@ -130,14 +130,14 @@ const Login = () => {
 
       <div className="w-full block md:flex md:flex-row items-center justify-between gap-9">
         <Button
-          onClick={() => handleOAuthLogin(githubProvider,setLoading)}
+          onClick={() => handleOAuthLogin(githubProvider, setLoading)}
           variant="outlined"
           className=" text-black w-full bg-white2 px-[80px] py-[10px] border-gray-400 hover:bg-yellow gap-2 capitalize mb-[20px] md:mb-[0px]"
         >
           Github
         </Button>
         <Button
-          onClick={() => handleOAuthLogin(googleProvider,setLoading)}
+          onClick={() => handleOAuthLogin(googleProvider, setLoading)}
           variant="outlined"
           className=" text-black w-full bg-white2 px-[80px] py-[10px] border-gray-400 hover:bg-yellow gap-2 capitalize"
         >
