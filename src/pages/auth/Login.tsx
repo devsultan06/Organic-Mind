@@ -6,60 +6,16 @@ import useLogin from "./hooks/useLogin";
 import { useState } from "react";
 import AlertModal from "./components/AlertModal";
 import { Audio } from "react-loader-spinner";
-import { signInWithPopup } from "firebase/auth";
-import { auth, googleProvider, githubProvider, db } from "../../firebase/config/firebase";
-import { useNavigate } from "react-router-dom";
-import { doc, setDoc } from "firebase/firestore";
-import { formatDate } from "../../utils/dateUtils";
+import { googleProvider, githubProvider } from "../../firebase/config/firebase";
+import useAuthLogin from "./hooks/useAuthLogin";
 
 const Login = () => {
-  const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(false);
   const [message, setMessage] = useState<{ message: string; type: "success" | "error" }>({ message: "", type: "success" });
 
   const handleSetMessage = (message: string, type: "success" | "error") => {
     setMessage({ message, type });
   };
-
-  const handleOAuthLogin = async (provider: any) => {
-    setLoading(true);
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-
-      const providerUsed = provider.providerId; // e.g., "google.com" or "github.com"
-      console.log(user);
-
-      const currentDate = new Date();
-      const formattedDate = formatDate(currentDate);
-
-      await setDoc(doc(db, "users", user.uid), {
-        username: user.displayName,
-        photoURL: user.photoURL,
-        provider: providerUsed,
-        createdAt: formattedDate,
-      });
-
-      handleSetMessage(
-        "Registration Successful. Redirecting...",
-        "success",
-      );
-
-      console.log("Successful");
-
-      resetForm();
-
-      setTimeout(() => {
-        navigate("/home");
-      }, 3000);
-
-    } catch (error: any) {
-      setMessage({ message: error.message, type: "error" });
-    } finally {
-      setLoading(false);
-    }
-  };
-
 
   const {
     values,
@@ -90,6 +46,8 @@ const Login = () => {
   });
 
   const login = useLogin({ handleSetMessage, resetForm });
+
+  const handleOAuthLogin = useAuthLogin({ handleSetMessage, resetForm});
 
 
   return (
@@ -172,14 +130,14 @@ const Login = () => {
 
       <div className="w-full block md:flex md:flex-row items-center justify-between gap-9">
         <Button
-          onClick={() => handleOAuthLogin(githubProvider)}
+          onClick={() => handleOAuthLogin(githubProvider,setLoading)}
           variant="outlined"
           className=" text-black w-full bg-white2 px-[80px] py-[10px] border-gray-400 hover:bg-yellow gap-2 capitalize mb-[20px] md:mb-[0px]"
         >
           Github
         </Button>
         <Button
-          onClick={() => handleOAuthLogin(googleProvider)}
+          onClick={() => handleOAuthLogin(googleProvider,setLoading)}
           variant="outlined"
           className=" text-black w-full bg-white2 px-[80px] py-[10px] border-gray-400 hover:bg-yellow gap-2 capitalize"
         >
