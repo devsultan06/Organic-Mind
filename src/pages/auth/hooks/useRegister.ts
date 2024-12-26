@@ -28,9 +28,10 @@ interface UseRegisterParams {
     resetForm: ResetForm;
     setFieldValue: SetFieldValue;
     profilePictureInputRef: React.RefObject<HTMLInputElement>;
+    setImagePreview: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
-const useRegister = ({ handleSetMessage, resetForm, setFieldValue, profilePictureInputRef }: UseRegisterParams) => {
+const useRegister = ({ handleSetMessage, resetForm, setFieldValue, profilePictureInputRef, setImagePreview }: UseRegisterParams) => {
     const navigate = useNavigate();
     const register = async ({ username, email, password, profilePicture, setLoading }: RegisterParams) => {
         setLoading(true);
@@ -95,6 +96,7 @@ const useRegister = ({ handleSetMessage, resetForm, setFieldValue, profilePictur
             if (profilePictureInputRef.current) {
                 profilePictureInputRef.current.value = "";
             }
+            setImagePreview(null)
             setTimeout(() => {
                 navigate("/get-started/login");
             }, 3000);

@@ -1,5 +1,4 @@
-// hooks/useLogin.js
-
+// hooks/useAuthLogin.js
 import { signInWithPopup } from "firebase/auth";
 import { auth, db } from "../../../firebase/config/firebase";
 import { formatDate } from "../../../utils/dateUtils";

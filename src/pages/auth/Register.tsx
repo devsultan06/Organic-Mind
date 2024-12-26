@@ -14,16 +14,16 @@ type Register = {
   profilePicture: File | null;
 };
 
-type HandleSetMessage = (message: string, type: "success" | "error") => void;
-
-
-interface UseRegisterParams {
-  handleSetMessage: HandleSetMessage;
-  message: any
-}
-const Register = ({ handleSetMessage, message }: UseRegisterParams) => {
+const Register = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const profilePictureInputRef = useRef<HTMLInputElement | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+
+  const [message, setMessage] = useState<{ message: string; type: "success" | "error" }>({ message: "", type: "success" });
+
+  const handleSetMessage = (message: string, type: "success" | "error") => {
+    setMessage({ message, type });
+  };
 
 
   const {
@@ -61,7 +61,18 @@ const Register = ({ handleSetMessage, message }: UseRegisterParams) => {
     },
   });
 
-  const register = useRegister({ handleSetMessage, resetForm, setFieldValue, profilePictureInputRef });
+  const register = useRegister({ handleSetMessage, resetForm, setFieldValue, profilePictureInputRef,setImagePreview });
+
+  // Handle image preview
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files ? event.target.files[0] : null;
+    setFieldValue("profilePicture", file);
+    if (file) {
+      setImagePreview(URL.createObjectURL(file));
+    } else {
+      setImagePreview(null);
+    }
+  };
 
   return (
     <div className="w-full max-w-[500px] flex flex-col items-start ">
@@ -163,21 +174,33 @@ const Register = ({ handleSetMessage, message }: UseRegisterParams) => {
             type="file"
             accept="image/*"
             ref={profilePictureInputRef}
-            onChange={(event) => {
-              const file = event.currentTarget.files
-                ? event.currentTarget.files[0]
-                : null;
-              setFieldValue("profilePicture", file);
-            }}
-            className="w-full bg-gray-200 p-2 rounded-lg"
+            onChange={handleImageChange}
+            className="hidden"
           />
+          <button
+            type="button"
+            onClick={() => profilePictureInputRef.current?.click()}
+            className=" bg-yellow text-black px-4 py-2 rounded-lg transition duration-200"
+          >
+            Choose File
+          </button>
+          {imagePreview && (
+            <div className="mt-4">
+              <p className="text-gray-600 text-[14px] mb-2">Image Preview:</p>
+              <img
+                src={imagePreview}
+                alt="Profile Preview"
+                className="w-24 h-24 object-cover rounded-full border"
+              />
+            </div>
+          )}
           {touched.profilePicture && errors.profilePicture && (
             <p className="text-red-500 text-sm">{errors.profilePicture}</p>
           )}
         </div>
 
         <Button>Sign Up</Button>
-        
+
       </form>
       {loading && (
         <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50">

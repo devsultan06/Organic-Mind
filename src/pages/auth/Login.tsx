@@ -10,15 +10,13 @@ import useAuthLogin from "./hooks/useAuthLogin";
 import Button from "../../components/ui/Button";
 import { Button as MTButton } from "@material-tailwind/react";
 
+const Login = () => {
+  const [message, setMessage] = useState<{ message: string; type: "success" | "error" }>({ message: "", type: "success" });
 
+  const handleSetMessage = (message: string, type: "success" | "error") => {
+    setMessage({ message, type });
+  };
 
-type HandleSetMessage = (message: string, type: "success" | "error") => void;
-
-interface UseLoginParams {
-  handleSetMessage: HandleSetMessage;
-  message: any
-}
-const Login = ({ handleSetMessage, message }: UseLoginParams) => {
   const [loading, setLoading] = useState<boolean>(false);
   const {
     values,
@@ -51,7 +49,6 @@ const Login = ({ handleSetMessage, message }: UseLoginParams) => {
   const login = useLogin({ handleSetMessage, resetForm });
 
   const handleOAuthLogin = useAuthLogin({ handleSetMessage, resetForm });
-
 
   return (
     <div className="w-full max-w-[500px] flex flex-col items-start ">
@@ -130,14 +127,14 @@ const Login = ({ handleSetMessage, message }: UseLoginParams) => {
         <MTButton
           onClick={() => handleOAuthLogin(githubProvider, setLoading)}
           variant="outlined"
-          className=" text-black w-full bg-white2 px-[80px] py-[10px] border-gray-400 hover:bg-yellow gap-2 capitalize mb-[20px] md:mb-[0px]"
+          className=" text-black w-full bg-white2 px-[80px] py-[10px] hover:bg-yellow gap-2 capitalize mb-[20px] md:mb-[0px]"
         >
           Github
         </MTButton>
         <MTButton
           onClick={() => handleOAuthLogin(googleProvider, setLoading)}
           variant="outlined"
-          className=" text-black w-full bg-white2 px-[80px] py-[10px] border-gray-400 hover:bg-yellow gap-2 capitalize"
+          className=" text-black w-full bg-white2 px-[80px] py-[10px] hover:bg-yellow gap-2 capitalize"
         >
           Google
         </MTButton>

@@ -3,7 +3,7 @@ import Login from "./Login";
 import Register from "./Register";
 import { setRegisterState } from "../../store/slices/authSlice";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { RootState } from "../../types/stateTypes";
 import {
     Card,
@@ -13,11 +13,6 @@ import CustomCard from "../../components/layout/CustomCard";
 import CustomCardBody from "../../components/layout/CustomCardBody";
 
 const Auth: React.FC = () => {
-    const [message, setMessage] = useState<{ message: string; type: "success" | "error" }>({ message: "", type: "success" });
-
-    const handleSetMessage = (message: string, type: "success" | "error") => {
-        setMessage({ message, type });
-    };
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -64,7 +59,7 @@ const Auth: React.FC = () => {
 
             <CustomCardBody >
                 <div className="w-full max-w-[500px] flex flex-col items-start">
-                    {isRegister ? <Register handleSetMessage={handleSetMessage} message={message} /> : <Login handleSetMessage={handleSetMessage} message={message} />}
+                    {isRegister ? <Register /> : <Login />}
                 </div>
                 <div style={{ marginTop: "20px", textAlign: "center" }}>
                     <button onClick={toggleAuth} className="underline">
