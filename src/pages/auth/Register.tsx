@@ -1,4 +1,3 @@
-import { Button } from "@material-tailwind/react";
 import { TextField } from "@mui/material";
 import { registerSchema } from "../../schemas/schema";
 import { useFormik } from "formik";
@@ -6,6 +5,7 @@ import { useRef, useState } from "react";
 import useRegister from "./hooks/useRegister";
 import { Audio } from "react-loader-spinner";
 import AlertModal from "./components/AlertModal";
+import Button from "../../components/ui/Button";
 
 type Register = {
   username: string;
@@ -176,15 +176,8 @@ const Register = ({ handleSetMessage, message }: UseRegisterParams) => {
           )}
         </div>
 
-        <Button
-          type="submit"
-          variant="text"
-          className="w-full bg-yellow text-black font-medium py-2 rounded-lg text-[16px] text-center transition duration-200 ease-in-out hover:bg-darkblack hover:text-[#fff]"
-        >
-          Sign Up
-        </Button>
-
-
+        <Button>Sign Up</Button>
+        
       </form>
       {loading && (
         <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50">

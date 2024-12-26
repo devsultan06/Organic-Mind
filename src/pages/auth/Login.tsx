@@ -1,4 +1,3 @@
-import { Button } from "@material-tailwind/react";
 import { TextField } from "@mui/material";
 import { useFormik } from "formik";
 import { loginSchema } from "../../schemas/schema";
@@ -8,8 +7,12 @@ import AlertModal from "./components/AlertModal";
 import { Audio } from "react-loader-spinner";
 import { googleProvider, githubProvider } from "../../firebase/config/firebase";
 import useAuthLogin from "./hooks/useAuthLogin";
-type HandleSetMessage = (message: string, type: "success" | "error") => void;
+import Button from "../../components/ui/Button";
+import { Button as MTButton } from "@material-tailwind/react";
 
+
+
+type HandleSetMessage = (message: string, type: "success" | "error") => void;
 
 interface UseLoginParams {
   handleSetMessage: HandleSetMessage;
@@ -113,13 +116,8 @@ const Login = ({ handleSetMessage, message }: UseLoginParams) => {
           />
         </div>
 
-        <Button
-          type="submit"
-          variant="text"
-          className="w-full bg-yellow text-black font-medium py-2 rounded-lg text-[16px] text-center transition duration-200 ease-in-out hover:bg-darkblack hover:text-[#fff]"
-        >
-          Login
-        </Button>
+        <Button>Login</Button>
+
       </form>
 
       <div className="flex items-center my-6 w-full">
@@ -129,20 +127,20 @@ const Login = ({ handleSetMessage, message }: UseLoginParams) => {
       </div>
 
       <div className="w-full block md:flex md:flex-row items-center justify-between gap-9">
-        <Button
+        <MTButton
           onClick={() => handleOAuthLogin(githubProvider, setLoading)}
           variant="outlined"
           className=" text-black w-full bg-white2 px-[80px] py-[10px] border-gray-400 hover:bg-yellow gap-2 capitalize mb-[20px] md:mb-[0px]"
         >
           Github
-        </Button>
-        <Button
+        </MTButton>
+        <MTButton
           onClick={() => handleOAuthLogin(googleProvider, setLoading)}
           variant="outlined"
           className=" text-black w-full bg-white2 px-[80px] py-[10px] border-gray-400 hover:bg-yellow gap-2 capitalize"
         >
           Google
-        </Button>
+        </MTButton>
       </div>
 
       {loading && (
