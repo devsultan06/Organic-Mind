@@ -24,9 +24,9 @@ const Auth: React.FC = () => {
 
     useEffect(() => {
         if (location.pathname === "/get-started/register" && !isRegister) {
-            dispatch(setRegisterState(true)); // Set to Register if we're on /register route
+            dispatch(setRegisterState(true)); 
         } else if (location.pathname === "/get-started/login" && isRegister) {
-            dispatch(setRegisterState(false)); // Set to Login if we're on /login route
+            dispatch(setRegisterState(false)); 
         }
     }, [location, dispatch, isRegister]);
 

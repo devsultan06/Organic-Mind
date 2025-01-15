@@ -18,12 +18,10 @@ const CustomCard: React.FC = () => {
 
     return (
         <div className="relative flex-1 bg-darkblack text-[#fff] flex flex-col h-full">
-            {/* Website Name in Header */}
             <div className="absolute top-4 left-4 text-[30px] font-bold">
                 Organic Mind
             </div>
 
-            {/* Centered Image */}
             <div className="flex-grow flex justify-center items-center">
                 <img
                     src={getLogo()}

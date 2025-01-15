@@ -20,7 +20,7 @@ const useAuthLogin = ({ handleSetMessage, resetForm}: UseRegisterParams) => {
             const result = await signInWithPopup(auth, provider);
             const user = result.user;
 
-            const providerUsed = provider.providerId; // e.g., "google.com" or "github.com"
+            const providerUsed = provider.providerId; 
             console.log(user);
 
             const currentDate = new Date();
