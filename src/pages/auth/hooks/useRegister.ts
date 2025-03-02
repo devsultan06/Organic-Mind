@@ -36,8 +36,6 @@ interface UseRegisterParams {
 
 const useRegister = ({ handleSetMessage, resetForm, setFieldValue, profilePictureInputRef, setImagePreview }: UseRegisterParams) => {
     const navigate = useNavigate();
-    const dispatch = useDispatch<AppDispatch>();
-
     const register = async ({ username, email, password, profilePicture, setLoading }: RegisterParams) => {
         setLoading(true);
         handleSetMessage("", "success");
