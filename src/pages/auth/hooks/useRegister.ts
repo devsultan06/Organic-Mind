@@ -8,9 +8,6 @@ import { doc, setDoc } from "firebase/firestore";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { formatDate } from "../../../utils/dateUtils";
-import { fetchUser } from "../../../store/slices/userSlice";
-import { AppDispatch } from "../../../store/store";
-import { useDispatch } from "react-redux";
 
 
 type HandleSetMessage = (message: string, type: "success" | "error") => void;
