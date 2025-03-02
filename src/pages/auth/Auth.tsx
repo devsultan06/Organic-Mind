@@ -4,13 +4,13 @@ import Register from "./Register";
 import { setRegisterState } from "../../store/slices/authSlice";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect} from "react";
-import { RootState } from "../../types/stateTypes";
 import {
     Card,
 
 } from "@material-tailwind/react";
 import CustomCard from "../../components/layout/CustomCard";
 import CustomCardBody from "../../components/layout/CustomCardBody";
+import { RootState } from "../../store/store";
 
 const Auth: React.FC = () => {
 

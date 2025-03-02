@@ -1,34 +1,51 @@
-// /* eslint-disable react/prop-types */
-// import { useContext } from "react";
-// import { Navigate } from "react-router-dom";
-// import { AuthContext } from "../contexts/AuthContext";
-// import { ThreeDots } from "react-loader-spinner";
+/* eslint-disable react/prop-types */
+import { Navigate } from "react-router-dom";
+import { ThreeDots } from "react-loader-spinner";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 
-// const ProtectedRoute = ({ element }) => {
-//   const { isAuthenticated, loading } = useContext(AuthContext);
+import { ReactElement } from "react";
 
-//   if (loading) {
-//     return (
-//       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black06 bg-opacity-50">
-//         <ThreeDots
-//           visible={true}
-//           height="80"
-//           width="80"
-//           color="#FF0000"
-//           radius="9"
-//           ariaLabel="three-dots-loading"
-//           wrapperStyle={{}}
-//           wrapperClass=""
-//         />{" "}
-//       </div>
-//     ); // Or return a loading spinner
-//   }
+interface ProtectedRouteProps {
+    element: ReactElement;
+}
 
-//   if (!isAuthenticated) {
-//     return <Navigate to="/auth" replace />; // Redirect to login if not authenticated
-//   }
+const ProtectedRoute = ({ element }: ProtectedRouteProps) => {
 
-//   return element; // Render protected route if authenticated
-// };
+    const { user, isAuthenticated, loading } = useSelector((state: RootState) => state.user);
 
-// export default ProtectedRoute;
+    console.log(user, isAuthenticated, loading);
+
+    if (loading) {
+        return (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black06">
+                <ThreeDots height="80" width="80" color="#FF0000" radius="9" />
+            </div>
+        );
+    }
+
+    if (loading) {
+        return (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black06 bg-opacity-50">
+                <ThreeDots
+                    visible={true}
+                    height="80"
+                    width="80"
+                    color="#FF0000"
+                    radius="9"
+                    ariaLabel="three-dots-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                />{" "}
+            </div>
+        );
+    }
+
+    if (!isAuthenticated) {
+        return <Navigate to="/auth" replace />;
+    }
+
+    return element;
+};
+
+export default ProtectedRoute;
