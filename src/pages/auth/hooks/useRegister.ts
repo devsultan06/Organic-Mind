@@ -8,6 +8,9 @@ import { doc, setDoc } from "firebase/firestore";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { formatDate } from "../../../utils/dateUtils";
+import { fetchUser } from "../../../store/slices/userSlice";
+import { AppDispatch } from "../../../store/store";
+import { useDispatch } from "react-redux";
 
 
 type HandleSetMessage = (message: string, type: "success" | "error") => void;
@@ -33,6 +36,8 @@ interface UseRegisterParams {
 
 const useRegister = ({ handleSetMessage, resetForm, setFieldValue, profilePictureInputRef, setImagePreview }: UseRegisterParams) => {
     const navigate = useNavigate();
+    const dispatch = useDispatch<AppDispatch>();
+
     const register = async ({ username, email, password, profilePicture, setLoading }: RegisterParams) => {
         setLoading(true);
         handleSetMessage("", "success");
@@ -99,7 +104,7 @@ const useRegister = ({ handleSetMessage, resetForm, setFieldValue, profilePictur
             setImagePreview(null)
             setTimeout(() => {
                 navigate("/get-started/login");
-            }, 3000);
+            }, 1000);
         } catch (error: any) {
             let errorMessage = "An unexpected error occurred. Please try again.";
             if (error.code === "auth/email-already-in-use") {

@@ -2,6 +2,9 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../../firebase/config/firebase.js";
+import { fetchUser } from "../../../store/slices/userSlice.js";
+import { AppDispatch } from "../../../store/store.js";
+import { useDispatch } from "react-redux";
 
 
 type HandleSetMessage = (message: string, type: "success" | "error") => void;
@@ -19,6 +22,8 @@ interface UseRegisterParams {
 }
 const useLogin = ({ handleSetMessage, resetForm }: UseRegisterParams) => {
     const navigate = useNavigate();
+    const dispatch = useDispatch<AppDispatch>();
+
     const login = async ({ email, password, setLoading }: RegisterParams) => {
         setLoading(true);
         handleSetMessage("", "success");
@@ -31,6 +36,8 @@ const useLogin = ({ handleSetMessage, resetForm }: UseRegisterParams) => {
             );
             handleSetMessage("Logged in successfully. Redirecting...", "success");
             resetForm({ email: "", password: "" });
+
+            dispatch(fetchUser());
 
             setTimeout(() => {
                 navigate("/home");

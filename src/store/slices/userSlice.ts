@@ -2,14 +2,12 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { auth } from "../../firebase/config/firebase";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 
-// Define the user type
 interface User {
   email: string | null;
   username: string | null;
   photoURL: string | null;
 }
 
-// Define the initial state type
 interface AuthState {
   user: User | null;
   isAuthenticated: boolean;
@@ -17,7 +15,6 @@ interface AuthState {
   error: string | null;
 }
 
-// Initial state
 const initialState: AuthState = {
   user: null,
   isAuthenticated: false,
@@ -25,21 +22,21 @@ const initialState: AuthState = {
   error: null,
 };
 
-// Async thunk to fetch user data
 export const fetchUser = createAsyncThunk<User | null>(
   "auth/fetchUser",
   async () => {
-    return new Promise<User | null>((resolve, reject) => {
+    return new Promise<User | null>((resolve) => {
       auth.onAuthStateChanged(async (currentUser) => {
         if (currentUser) {
           const db = getFirestore();
           const userDocRef = doc(db, "users", currentUser.uid);
           const userDoc = await getDoc(userDocRef);
+          const firestorePhotoURL = userDoc.exists() ? userDoc.data().photoURL : null;
 
           const userData: User = {
             email: currentUser.email,
             username: currentUser.displayName,
-            photoURL: currentUser.photoURL || "DEFAULT_PHOTO_URL",
+            photoURL: firestorePhotoURL || "DEFAULT_PHOTO_URL",
           };
 
           resolve(userData);
@@ -51,7 +48,6 @@ export const fetchUser = createAsyncThunk<User | null>(
   }
 );
 
-// Redux slice
 const userSlice = createSlice({
   name: "user",
   initialState,

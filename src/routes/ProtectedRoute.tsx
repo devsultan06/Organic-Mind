@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Navigate } from "react-router-dom";
-import { ThreeDots } from "react-loader-spinner";
+import { Audio } from "react-loader-spinner";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 
@@ -16,33 +16,24 @@ const ProtectedRoute = ({ element }: ProtectedRouteProps) => {
 
     console.log(user, isAuthenticated, loading);
 
-    if (loading) {
-        return (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black06">
-                <ThreeDots height="80" width="80" color="#FF0000" radius="9" />
-            </div>
-        );
-    }
 
     if (loading) {
         return (
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black06 bg-opacity-50">
-                <ThreeDots
+                <Audio
+                    height="100"
+                    width="100"
+                    color="#FFD700"
+                    ariaLabel="audio-loading"
+                    wrapperClass="wrapper-class"
                     visible={true}
-                    height="80"
-                    width="80"
-                    color="#FF0000"
-                    radius="9"
-                    ariaLabel="three-dots-loading"
-                    wrapperStyle={{}}
-                    wrapperClass=""
-                />{" "}
+                />
             </div>
         );
     }
 
     if (!isAuthenticated) {
-        return <Navigate to="/auth" replace />;
+        return <Navigate to="/get-started/register" replace />;
     }
 
     return element;
