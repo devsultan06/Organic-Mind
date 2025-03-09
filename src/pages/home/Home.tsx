@@ -1,7 +1,9 @@
+import Sidebar2 from "./components/Sidebar2";
+
 const Home = () => {
   return (
-    <div className="p-[20px]">
-      <h1 className="">This is Home Page</h1>
+    <div className="">
+      <Sidebar2 />
     </div>
   );
 };
