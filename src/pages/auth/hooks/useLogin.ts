@@ -40,7 +40,7 @@ const useLogin = ({ handleSetMessage, resetForm }: UseRegisterParams) => {
             dispatch(fetchUser());
 
             setTimeout(() => {
-                navigate("/home");
+                navigate("/today");
             }, 3000);
 
         } catch (error: any) {

@@ -3,6 +3,8 @@ import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { FiSettings, FiLogOut, FiCalendar, FiSearch } from "react-icons/fi";
 import { MdStickyNote2 } from "react-icons/md";
 import { AiOutlineMenu } from "react-icons/ai";
+import { Link } from "react-router-dom";
+
 
 export default function Sidebar2() {
     const [collapsed, setCollapsed] = useState(false);
@@ -29,7 +31,7 @@ export default function Sidebar2() {
                 }} >
                     <Menu>
                         <MenuItem icon={<AiOutlineMenu />} onClick={() => setCollapsed(!collapsed)}>
-                            Menu
+                            Organic Mind
                         </MenuItem>
                         <MenuItem icon={<FiSearch />} className="flex border border-gray-300 rounded-md">
                             <input
@@ -45,46 +47,49 @@ export default function Sidebar2() {
                             <div className="pl-4 py-2 text-gray-600 font-semibold ">Tasks</div>
 
                             <MenuItem icon={<FiCalendar />}>
-                                <div className="flex justify-between w-full">
+                                <Link to="/upcoming" className="flex justify-between w-full">
                                     <span>Upcoming</span>
                                     <span className="text-gray-500">12</span>
-                                </div>
+                                </Link>
                             </MenuItem>
 
                             <MenuItem icon={<FiCalendar />}>
-                                <div className="flex justify-between w-full">
+                                <Link to="/today" className="flex justify-between w-full">
                                     <span>Today</span>
                                     <span className="text-gray-500">5</span>
-                                </div>
+                                </Link>
                             </MenuItem>
 
 
-                            <MenuItem icon={<FiCalendar />} className="text-black">Calendar</MenuItem>
-                            <MenuItem icon={<MdStickyNote2 />}>Sticky Wall</MenuItem>
+                            <MenuItem icon={<FiCalendar />} className="text-black">  <Link to="/calendar">Calendar</Link>
+                            </MenuItem>
+                            <MenuItem icon={<MdStickyNote2 />}>
+                                <Link to="/stickywall">Sticky Wall</Link>
+                            </MenuItem>
                         </div>
 
                         <div className="border-b border-gray-300">
                             <div className="pl-4 py-2 text-gray-600 font-semibold  mt-3">Lists</div>
 
                             <MenuItem icon={<FiCalendar />}>
-                                <div className="flex justify-between w-full">
+                                <Link to="personal" className="flex justify-between w-full">
                                     <span>Personal</span>
                                     <span className="text-gray-500">3</span>
-                                </div>
+                                </Link>
                             </MenuItem>
 
                             <MenuItem icon={<FiCalendar />}>
-                                <div className="flex justify-between w-full">
+                                <Link to="/work" className="flex justify-between w-full">
                                     <span>Work</span>
                                     <span className="text-gray-500">6</span>
-                                </div>
+                                </Link>
                             </MenuItem>
 
                             <MenuItem icon={<FiCalendar />}>
-                                <div className="flex justify-between w-full">
+                                <Link to="/list" className="flex justify-between w-full">
                                     <span>List 1</span>
                                     <span className="text-gray-500">3</span>
-                                </div>
+                                </Link>
                             </MenuItem>
 
                             <MenuItem className="pl-3 text-gray-700 font-semibold text-[20px]">
