@@ -13,8 +13,8 @@ export default function Sidebar2() {
     const [hovered, setHovered] = useState<string | null>(null);
 
     const getBgColor = (path: string) => {
-        if (location.pathname === path) return "#ebebeb"; 
-        return hovered === path ? "#ebebeb" : "transparent"; 
+        if (location.pathname === path) return "#ebebeb";
+        return hovered === path ? "#ebebeb" : "transparent";
     };
 
     return (
@@ -40,7 +40,7 @@ export default function Sidebar2() {
                         <MenuItem icon={<AiOutlineMenu />} onClick={() => setCollapsed(!collapsed)}
                             style={{
                                 backgroundColor: "transparent",
-                                cursor: "pointer", 
+                                cursor: "pointer",
                             }}
                             className="hover:bg-transparent focus:bg-transparent active:bg-transparent">
                             Organic Mind
@@ -195,13 +195,13 @@ export default function Sidebar2() {
                             <div className="pl-4 py-2 text-gray-600 font-semibold mt-3">Tags</div>
 
                             <div className="grid grid-cols-3 gap-2 px-4">
-                                <div className="bg-green-200 text-green-800 px-2 py-1 rounded-md text-center text-sm">
+                                <div className="bg-green-200 px-2 py-1 rounded-md text-center text-sm">
                                     Tag 1
                                 </div>
-                                <div className="bg-red-200 text-red-800 px-2 py-1 rounded-md text-center text-sm">
+                                <div className="bg-red2 px-2 py-1 rounded-md text-center text-sm">
                                     Tag 2
                                 </div>
-                                <div className="bg-blue-200 text-blue-800 px-2 py-1 rounded-md text-center text-sm">
+                                <div className="bg-blue-200 px-2 py-1 rounded-md text-center text-sm">
                                     Tag 3
                                 </div>
 
