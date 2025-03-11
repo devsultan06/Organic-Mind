@@ -14,6 +14,8 @@ import Personal from "./pages/home/pages/personal/Personal";
 import StickyWall from "./pages/home/pages/stickywall/StickyWall";
 import Work from "./pages/home/pages/work/Work";
 import List from "./pages/home/pages/list/List";
+import Settings from "./pages/home/pages/settings/Settings";
+import LogOut from "./pages/home/pages/logout/LogOut";
 
 const App = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -31,7 +33,6 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Navigate to="/get-started" replace />} />
         <Route path="/get-started" element={<GetStarted />} />
-        {/* Direct routes for login and register */}
         <Route path="/get-started/login" element={<Auth />} />
         <Route path="/get-started/register" element={<Auth />} />
         <Route path="/home" element={<ProtectedRoute element={<Home />} />} />
@@ -45,8 +46,9 @@ const App = () => {
           <Route path="work" element={<Work />} />
           <Route path="list" element={<List />} />
           <Route path="personal" element={<Personal />} />
+          <Route path="settings" element={<Settings />} />
+          <Route path="logout" element={<LogOut />} />
 
-          {/* Redirect from "/" to "/today" */}
           <Route path="home" element={<Navigate to="today" replace />} />
         </Route>
 

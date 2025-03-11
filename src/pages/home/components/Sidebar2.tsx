@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { FiSettings, FiLogOut, FiCalendar, FiSearch } from "react-icons/fi";
-import { MdStickyNote2 } from "react-icons/md";
+import { MdStickyNote2, MdToday, MdUpcoming } from "react-icons/md";
 import { AiOutlineMenu } from "react-icons/ai";
 import { Link, useLocation } from "react-router-dom";
 
@@ -67,7 +67,7 @@ export default function Sidebar2() {
                             <div className="pl-4 py-2 text-gray-600 font-semibold ">Tasks</div>
 
                             <MenuItem
-                                icon={<FiCalendar />}
+                                icon={<MdUpcoming />}
                                 component={<Link to="/upcoming" />}
                                 onClick={() => setMobileOpen(false)}
                                 style={{
@@ -86,7 +86,7 @@ export default function Sidebar2() {
                             </MenuItem>
 
                             <MenuItem
-                                icon={<FiCalendar />}
+                                icon={< MdToday />}
                                 component={<Link to="/today" />}
                                 onClick={() => setMobileOpen(false)}
                                 style={{
