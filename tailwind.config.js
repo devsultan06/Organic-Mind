@@ -7,6 +7,7 @@ export default {
         yellow: "#FFD43A",
         darkblack: "#111111",
         white2: "#ebebeb",
+        white3: "#f4f4f4",
       },
     },
   },

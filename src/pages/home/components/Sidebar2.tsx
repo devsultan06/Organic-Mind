@@ -3,12 +3,19 @@ import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { FiSettings, FiLogOut, FiCalendar, FiSearch } from "react-icons/fi";
 import { MdStickyNote2 } from "react-icons/md";
 import { AiOutlineMenu } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 
 export default function Sidebar2() {
     const [collapsed, setCollapsed] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
+    const location = useLocation();
+    const [hovered, setHovered] = useState<string | null>(null);
+
+    const getBgColor = (path: string) => {
+        if (location.pathname === path) return "#ebebeb"; 
+        return hovered === path ? "#ebebeb" : "transparent"; 
+    };
 
     return (
         <div className="h-screen relative">
@@ -25,12 +32,17 @@ export default function Sidebar2() {
                 className={`fixed top-0  left-0 h-full transition-all duration-300 z-40 ${mobileOpen ? "translate-x-0" : "-translate-x-full"
                     } md:relative md:translate-x-0`}
             >
-                <Sidebar collapsed={collapsed} className="h-full bg-white2  text-black" rootStyles={{
+                <Sidebar collapsed={collapsed} className="h-full bg-white3  text-black" rootStyles={{
                     height: "100%",
                     width: collapsed ? "80px" : "300px",
                 }} >
                     <Menu>
-                        <MenuItem icon={<AiOutlineMenu />} onClick={() => setCollapsed(!collapsed)}>
+                        <MenuItem icon={<AiOutlineMenu />} onClick={() => setCollapsed(!collapsed)}
+                            style={{
+                                backgroundColor: "transparent",
+                                cursor: "pointer", 
+                            }}
+                            className="hover:bg-transparent focus:bg-transparent active:bg-transparent">
                             Organic Mind
                         </MenuItem>
                         <MenuItem icon={<FiSearch />} className="flex border border-gray-300 rounded-md">
@@ -46,67 +58,133 @@ export default function Sidebar2() {
 
                             <div className="pl-4 py-2 text-gray-600 font-semibold ">Tasks</div>
 
-                            <Link to="/upcoming">
-                                <MenuItem icon={<FiCalendar />}>
-                                    <div className="flex justify-between w-full">
-                                        <span>Upcoming</span>
-                                        <span className="text-gray-500">12</span>
-                                    </div>
-                                </MenuItem>
-                            </Link>
+                            <MenuItem
+                                icon={<FiCalendar />}
+                                component={<Link to="/upcoming" />}
+                                style={{
+                                    backgroundColor: getBgColor("/upcoming"),
+                                    transition: "background-color 0.3s ease",
+                                    marginBottom: "5px",
+                                    borderRadius: "5px"
+                                }}
+                                onMouseEnter={() => setHovered("/upcoming")}
+                                onMouseLeave={() => setHovered(null)}
+                            >
+                                <div className="flex justify-between w-full">
+                                    <span>Upcoming</span>
+                                    <span className="text-gray-500">12</span>
+                                </div>
+                            </MenuItem>
 
+                            <MenuItem
+                                icon={<FiCalendar />}
+                                component={<Link to="/today" />}
+                                style={{
+                                    backgroundColor: getBgColor("/today"),
+                                    transition: "background-color 0.3s ease",
+                                    marginBottom: "5px",
+                                    borderRadius: "5px"
+                                }}
+                                onMouseEnter={() => setHovered("/today")}
+                                onMouseLeave={() => setHovered(null)}
 
-                            <Link to="/today" >
-                                <MenuItem icon={<FiCalendar />}>
-                                    <div className="flex justify-between w-full">
-                                        <span>Today</span>
-                                        <span className="text-gray-500">5</span>
-                                    </div>
-                                </MenuItem>
-                            </Link>
+                            >
+                                <div className="flex justify-between w-full">
+                                    <span>Today</span>
+                                    <span className="text-gray-500">5</span>
+                                </div>
+                            </MenuItem>
 
-                            <Link to="/calendar">
-                                <MenuItem icon={<FiCalendar />} className="text-black">
-                                    <div >Calendar</div>
-                                </MenuItem>
-                            </Link>
+                            <MenuItem
+                                icon={<FiCalendar />}
+                                className="text-black"
+                                component={<Link to="/calendar" />}
+                                style={{
+                                    backgroundColor: getBgColor("/calendar"),
+                                    transition: "background-color 0.3s ease",
+                                    marginBottom: "5px",
+                                    borderRadius: "5px"
+                                }}
+                                onMouseEnter={() => setHovered("/calendar")}
+                                onMouseLeave={() => setHovered(null)}
+                            >
+                                <div >Calendar</div>
+                            </MenuItem>
 
-                            <Link to="/stickywall">
-                                <MenuItem icon={<MdStickyNote2 />}>
-                                    <div >Sticky Wall</div>
-                                </MenuItem>
-                            </Link>
+                            <MenuItem
+                                icon={<MdStickyNote2 />}
+                                component={<Link to="/stickywall" />}
+                                style={{
+                                    backgroundColor: getBgColor("/stickywall"),
+                                    transition: "background-color 0.3s ease",
+                                    marginBottom: "5px",
+                                    borderRadius: "5px"
+                                }}
+                                onMouseEnter={() => setHovered("/stickywall")}
+                                onMouseLeave={() => setHovered(null)}
+                            >
+                                <div >Sticky Wall</div>
+                            </MenuItem>
 
                         </div>
 
                         <div className="border-b border-gray-300">
                             <div className="pl-4 py-2 text-gray-600 font-semibold  mt-3">Lists</div>
 
-                            <Link to="personal" >
-                                <MenuItem icon={<FiCalendar />}>
-                                    <div className="flex justify-between w-full">
-                                        <span>Personal</span>
-                                        <span className="text-gray-500">3</span>
-                                    </div>
-                                </MenuItem>
-                            </Link>
+                            <MenuItem
+                                icon={<FiCalendar />}
+                                component={<Link to="/personal" />}
+                                style={{
+                                    backgroundColor: getBgColor("/personal"),
+                                    transition: "background-color 0.3s ease",
+                                    marginBottom: "5px",
+                                    borderRadius: "5px"
+                                }}
+                                onMouseEnter={() => setHovered("/personal")}
+                                onMouseLeave={() => setHovered(null)}
+                            >
+                                <div className="flex justify-between w-full">
+                                    <span>Personal</span>
+                                    <span className="text-gray-500">3</span>
+                                </div>
+                            </MenuItem>
 
 
-                            <Link to="/work">
-                                <MenuItem icon={<FiCalendar />}>
-                                    <div className="flex justify-between w-full">
-                                        <span>Work</span>
-                                        <span className="text-gray-500">6</span>
-                                    </div>
-                                </MenuItem></Link>
+                            <MenuItem
+                                icon={<FiCalendar />}
+                                component={<Link to="/work" />}
+                                style={{
+                                    backgroundColor: getBgColor("/work"),
+                                    transition: "background-color 0.3s ease",
+                                    marginBottom: "5px",
+                                    borderRadius: "5px"
+                                }}
+                                onMouseEnter={() => setHovered("/work")}
+                                onMouseLeave={() => setHovered(null)}
+                            >
+                                <div className="flex justify-between w-full">
+                                    <span>Work</span>
+                                    <span className="text-gray-500">6</span>
+                                </div>
+                            </MenuItem>
 
-                            <Link to="/list" >
-                                <MenuItem icon={<FiCalendar />}>
-                                    <div className="flex justify-between w-full">
-                                        <span>List 1</span>
-                                        <span className="text-gray-500">3</span>
-                                    </div>
-                                </MenuItem></Link>
+                            <MenuItem
+                                icon={<FiCalendar />}
+                                component={<Link to="/list" />}
+                                style={{
+                                    backgroundColor: getBgColor("/list"),
+                                    transition: "background-color 0.3s ease",
+                                    marginBottom: "5px",
+                                    borderRadius: "5px"
+                                }}
+                                onMouseEnter={() => setHovered("/list")}
+                                onMouseLeave={() => setHovered(null)}
+                            >
+                                <div className="flex justify-between w-full">
+                                    <span>List 1</span>
+                                    <span className="text-gray-500">3</span>
+                                </div>
+                            </MenuItem>
 
 
                             <MenuItem className="pl-3 text-gray-700 font-semibold text-[20px]">
@@ -116,7 +194,6 @@ export default function Sidebar2() {
                         <div>
                             <div className="pl-4 py-2 text-gray-600 font-semibold mt-3">Tags</div>
 
-                            {/* Tags Grid */}
                             <div className="grid grid-cols-3 gap-2 px-4">
                                 <div className="bg-green-200 text-green-800 px-2 py-1 rounded-md text-center text-sm">
                                     Tag 1
@@ -136,8 +213,35 @@ export default function Sidebar2() {
                         </div>
 
 
-                        <MenuItem icon={<FiSettings />}>Settings</MenuItem>
-                        <MenuItem icon={<FiLogOut />}>Sign out</MenuItem>
+                        <MenuItem
+                            icon={<FiSettings />}
+                            component={<Link to="/settings" />}
+                            style={{
+                                backgroundColor: getBgColor("/settings"),
+                                transition: "background-color 0.3s ease",
+                                marginBottom: "5px",
+                                borderRadius: "5px",
+                                marginTop: "10px"
+
+                            }}
+                            onMouseEnter={() => setHovered("/settings")}
+                            onMouseLeave={() => setHovered(null)}>
+                            Settings
+                        </MenuItem>
+                        <MenuItem
+                            icon={<FiLogOut />}
+                            component={<Link to="/logout" />}
+                            style={{
+                                backgroundColor: getBgColor("/logout"),
+                                transition: "background-color 0.3s ease",
+                                marginBottom: "5px",
+                                borderRadius: "5px",
+
+                            }}
+                            onMouseEnter={() => setHovered("/logout")}
+                            onMouseLeave={() => setHovered(null)}>
+                            Sign out
+                        </MenuItem>
                     </Menu>
                 </Sidebar>
             </div>
