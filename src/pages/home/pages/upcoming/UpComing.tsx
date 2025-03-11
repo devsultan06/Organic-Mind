@@ -4,8 +4,8 @@ import Week from "./Week";
 
 const UpComing = () => {
     return (
-        <div className="mb-[50px]">
-            <div className="flex items-center justify-start gap-9 mb-[25px] max-900:ml-[50px]">
+        <div className="mb-[50px] max-900:mt-[80px]">
+            <div className="flex items-center justify-start gap-9 mb-[25px]">
                 <div className="title">
                     <h1 className="text-[35px] font-semibold">Upcoming</h1>
                 </div>

@@ -20,12 +20,20 @@ export default function Sidebar2() {
     return (
         <div className="h-screen relative">
             {!mobileOpen && (
-                <button
-                    className="md:hidden fixed top-4 left-4 z-50 p-2 bg-gray-800 text-white rounded-md"
-                    onClick={() => setMobileOpen(true)}
-                >
-                    <AiOutlineMenu size={24} />
-                </button>
+                <div className="md:hidden fixed top-0 left-0 z-50 p-2 bg-white2 w-full flex items-center gap-6" >
+
+                    <button
+                        className=" bg-gray-800 text-white rounded-md  p-2"
+                        onClick={() => setMobileOpen(true)}
+                    >
+                        <AiOutlineMenu size={24} />
+                    </button>
+
+                    <div>
+                        <h1 className="text-[25px]">Organic Mind</h1>
+                    </div>
+                </div>
+
             )}
 
             <div
@@ -61,6 +69,7 @@ export default function Sidebar2() {
                             <MenuItem
                                 icon={<FiCalendar />}
                                 component={<Link to="/upcoming" />}
+                                onClick={() => setMobileOpen(false)}
                                 style={{
                                     backgroundColor: getBgColor("/upcoming"),
                                     transition: "background-color 0.3s ease",
@@ -79,6 +88,7 @@ export default function Sidebar2() {
                             <MenuItem
                                 icon={<FiCalendar />}
                                 component={<Link to="/today" />}
+                                onClick={() => setMobileOpen(false)}
                                 style={{
                                     backgroundColor: getBgColor("/today"),
                                     transition: "background-color 0.3s ease",
@@ -99,6 +109,7 @@ export default function Sidebar2() {
                                 icon={<FiCalendar />}
                                 className="text-black"
                                 component={<Link to="/calendar" />}
+                                onClick={() => setMobileOpen(false)}
                                 style={{
                                     backgroundColor: getBgColor("/calendar"),
                                     transition: "background-color 0.3s ease",
@@ -114,6 +125,7 @@ export default function Sidebar2() {
                             <MenuItem
                                 icon={<MdStickyNote2 />}
                                 component={<Link to="/stickywall" />}
+                                onClick={() => setMobileOpen(false)}
                                 style={{
                                     backgroundColor: getBgColor("/stickywall"),
                                     transition: "background-color 0.3s ease",
@@ -134,6 +146,7 @@ export default function Sidebar2() {
                             <MenuItem
                                 icon={<FiCalendar />}
                                 component={<Link to="/personal" />}
+                                onClick={() => setMobileOpen(false)}
                                 style={{
                                     backgroundColor: getBgColor("/personal"),
                                     transition: "background-color 0.3s ease",
@@ -153,6 +166,7 @@ export default function Sidebar2() {
                             <MenuItem
                                 icon={<FiCalendar />}
                                 component={<Link to="/work" />}
+                                onClick={() => setMobileOpen(false)}
                                 style={{
                                     backgroundColor: getBgColor("/work"),
                                     transition: "background-color 0.3s ease",
@@ -171,6 +185,7 @@ export default function Sidebar2() {
                             <MenuItem
                                 icon={<FiCalendar />}
                                 component={<Link to="/list" />}
+                                onClick={() => setMobileOpen(false)}
                                 style={{
                                     backgroundColor: getBgColor("/list"),
                                     transition: "background-color 0.3s ease",
@@ -216,6 +231,7 @@ export default function Sidebar2() {
                         <MenuItem
                             icon={<FiSettings />}
                             component={<Link to="/settings" />}
+                            onClick={() => setMobileOpen(false)}
                             style={{
                                 backgroundColor: getBgColor("/settings"),
                                 transition: "background-color 0.3s ease",
@@ -231,6 +247,7 @@ export default function Sidebar2() {
                         <MenuItem
                             icon={<FiLogOut />}
                             component={<Link to="/logout" />}
+                            onClick={() => setMobileOpen(false)}
                             style={{
                                 backgroundColor: getBgColor("/logout"),
                                 transition: "background-color 0.3s ease",

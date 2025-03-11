@@ -3,8 +3,8 @@ import { stickyNotes } from "../../data/stickyNotes";
 
 const StickyWall = () => {
     return (
-        <div className="mb-[30px]">
-            <div className="title max-900:ml-[50px]">
+        <div className="mb-[30px] max-900:mt-[80px]">
+            <div className="title">
 
                 <h1 className="text-[35px] font-semibold">Sticky Wall</h1>
 
