@@ -5,7 +5,7 @@ import CreateTodo from "../today/components/CreateTodo"
 const Tomorrow = () => {
     return (
         <div className="w-[50%] border border-white2 p-5 rounded-[10px] h-fit max-900:w-full max-900:mb-[30px]">
-            <div className="flex items-center justify-start gap-9">
+            <div className="flex items-center justify-start gap-9 max-900:ml-[50px]">
                 <div className="title">
                     <h1 className="text-[25px] font-semibold">Tommorrow</h1>
                 </div>

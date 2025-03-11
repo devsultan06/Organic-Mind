@@ -7,7 +7,7 @@ const Today = () => {
 
     return (
         <div>
-            <div className="flex items-center justify-start gap-9">
+            <div className="flex items-center justify-start gap-9 max-900:ml-[50px]">
                 <div className="title">
 
                     <h1 className={`font-semibold ${location.pathname === "/today" ? "text-[35px]" : "text-[25px]"}`}>
