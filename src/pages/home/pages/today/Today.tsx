@@ -18,7 +18,7 @@ const Today = () => {
                         Today
                     </h1>                </div>
                 {location.pathname === "/today" ? <div className="number border border-white2 w-[40px] h-[40px] flex items-center justify-center">
-                    <p className="text-[25px] leading-none">5</p>
+                    <p className="text-[25px] leading-none">{tasks.length}</p>
                 </div> : null}
 
 
