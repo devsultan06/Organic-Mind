@@ -5,9 +5,13 @@ import TaskList from "./components/TaskList";
 
 
 const Today = () => {
-    const { tasks} = useTasks(); // Use the custom hook
+    const { tasks } = useTasks();
 
     const location = useLocation();
+
+    const today = new Date().toISOString().split("T")[0]; // Get today's date
+    const todayTasks = tasks.filter((task) => task.date === today && task.category !== "week");
+
 
     return (
         <div className={`${location.pathname === "/today" ? "max-900:mt-[80px]" : ""}`}>
@@ -18,14 +22,14 @@ const Today = () => {
                         Today
                     </h1>                </div>
                 {location.pathname === "/today" ? <div className="number border border-white2 w-[40px] h-[40px] flex items-center justify-center">
-                    <p className="text-[25px] leading-none">{tasks.length}</p>
+                    <p className="text-[25px] leading-none">{todayTasks.length}</p>
                 </div> : null}
 
 
             </div>
-            <CreateTodo />
+            <CreateTodo category="today" />
 
-            <TaskList tasks={tasks} />
+            <TaskList tasks={todayTasks} />
 
         </div>
 

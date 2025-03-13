@@ -13,7 +13,7 @@ interface Task {
 }
 
 type TaskListProps = {
-  tasks: Task[]; // Expecting an array of Task objects
+  tasks: Task[]; 
 };
 
 
@@ -102,13 +102,13 @@ const TaskList = ({ tasks }: TaskListProps) => {
 
             {(task.date || (task.subtasks ?? 0) > 0 || task.category) && (
               <div className="flex items-center gap-3 pt-[10px]">
-                {task.date && (
+                {/* {task.date && (
                   <div className="flex items-center gap-1 text-gray-500">
                     <FaCalendarAlt />
                     <span>{task.date}</span>
                   </div>
-                )}
-                {(task.subtasks ?? 0) > 0 && (
+                )} */}
+                {/* {(task.subtasks ?? 0) > 0 && (
                   <div className="bg-gray-200 text-gray-700 px-2 py-1 rounded-md text-sm">
                     {task.subtasks} Subtasks
                   </div>
@@ -117,7 +117,7 @@ const TaskList = ({ tasks }: TaskListProps) => {
                   <div className={`px-2 py-1 rounded-md text-sm ${getCategoryStyles(task.category)}`}>
                     {task.category}
                   </div>
-                )}
+                )} */}
               </div>
             )}
           </div>
