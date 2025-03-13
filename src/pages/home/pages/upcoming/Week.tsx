@@ -5,20 +5,19 @@ import CreateTodo from "../today/components/CreateTodo";
 const Week = () => {
     const { tasks } = useTasks();
     const todayDate = new Date();
-    todayDate.setHours(0, 0, 0, 0); // Reset today's time to avoid issues
+    todayDate.setHours(0, 0, 0, 0); 
 
-    // Get the end of the week (Saturday)
     const endOfWeek = new Date(todayDate);
-    endOfWeek.setDate(todayDate.getDate() + (6 - todayDate.getDay())); // Move to Saturday
-    endOfWeek.setHours(23, 59, 59, 999); // Ensure it covers the full day
+    endOfWeek.setDate(todayDate.getDate() + (6 - todayDate.getDay()));
+    endOfWeek.setHours(23, 59, 59, 999);
 
     const thisWeekTasks = tasks.filter(task => {
         if (!task.date) return false;
 
-        const taskDate = new Date(task.date); // Convert task date to Date object
-        taskDate.setHours(0, 0, 0, 0); // Reset time for accurate comparison
+        const taskDate = new Date(task.date); 
+        taskDate.setHours(0, 0, 0, 0); 
 
-        return taskDate >= todayDate && taskDate <= endOfWeek; // Only tasks from today to Saturday
+        return taskDate >= todayDate && taskDate <= endOfWeek; 
     });
 
 
@@ -30,7 +29,6 @@ const Week = () => {
                 </div>
             </div>
 
-            {/* Pass "week" to CreateTodo */}
             <CreateTodo category="week" />
 
             {thisWeekTasks.length > 0 ? (

@@ -35,7 +35,6 @@ const CreateTodo: React.FC<CreateTodoProps> = ({ category }) => {
                 />
             </div>
 
-            {/* Show date picker for "week" category */}
             {category === "week" && (
                 <input
                     type="date"

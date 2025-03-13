@@ -1,15 +1,14 @@
 import { FiChevronRight } from "react-icons/fi";
 import CreateTodo from "../today/components/CreateTodo";
-import useTasks from "../../hooks/useTasks"; // Import the useTasks hook
+import useTasks from "../../hooks/useTasks"; 
 
 const Tomorrow = () => {
-    const { tasks } = useTasks(); // Fetch tasks from Firestore
+    const { tasks } = useTasks(); 
 
-    // Filter tasks that are scheduled for Tomorrow
     const today = new Date();
     const tomorrow = new Date(today);
     tomorrow.setDate(today.getDate() + 1);
-    const tomorrowStr = tomorrow.toISOString().split("T")[0]; // Format: YYYY-MM-DD
+    const tomorrowStr = tomorrow.toISOString().split("T")[0];
 
     const tomorrowTasks = tasks.filter((task) => task.date === tomorrowStr && task.category !== "week");
 
@@ -21,7 +20,6 @@ const Tomorrow = () => {
                 </div>
             </div>
 
-            {/* Component to create a new task for tomorrow */}
             <CreateTodo category="tomorrow" />
 
             {/* Render tomorrow's tasks */}
