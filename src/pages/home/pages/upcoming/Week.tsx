@@ -1,6 +1,7 @@
 import { FiChevronRight } from "react-icons/fi"
 import { thisWeekTasks } from "../../data/tasks"
 import CreateTodo from "../today/components/CreateTodo"
+import useTasks from "../../hooks/useTasks";
 
 const Week = () => {
     return (

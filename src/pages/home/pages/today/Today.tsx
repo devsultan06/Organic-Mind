@@ -1,8 +1,12 @@
 import { useLocation } from "react-router-dom";
 import CreateTodo from "./components/CreateTodo";
+import useTasks from "../../hooks/useTasks";
 import TaskList from "./components/TaskList";
 
+
 const Today = () => {
+    const { tasks} = useTasks(); // Use the custom hook
+
     const location = useLocation();
 
     return (
@@ -21,7 +25,7 @@ const Today = () => {
             </div>
             <CreateTodo />
 
-            <TaskList />
+            <TaskList tasks={tasks} />
 
         </div>
 

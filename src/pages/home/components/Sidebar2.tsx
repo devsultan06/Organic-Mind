@@ -53,13 +53,20 @@ export default function Sidebar2() {
                             className="hover:bg-transparent focus:bg-transparent active:bg-transparent">
                             Organic Mind
                         </MenuItem>
-                        <MenuItem icon={<FiSearch />} className="flex border border-gray-300 rounded-md">
-                            <input
-                                type="text"
-                                placeholder="Search"
-                                className="w-full p-2  outline-none bg-transparent "
-                            />
+                        <MenuItem
+                            icon={<FiSearch />}
+                            className="flex border border-gray-300 rounded-md"
+                            onClick={() => setCollapsed(false)} // Open sidebar when clicked
+                        >
+                            {!collapsed && (
+                                <input
+                                    type="text"
+                                    placeholder="Search"
+                                    className="w-full p-2 outline-none bg-transparent"
+                                />
+                            )}
                         </MenuItem>
+
 
                         <div className="border-b border-gray-300">
 
@@ -206,26 +213,27 @@ export default function Sidebar2() {
                                 + <span className="ml-4 text-[15px]">Add New List</span>
                             </MenuItem>
                         </div>
-                        <div>
+                        <div className="overflow-hidden">
                             <div className="pl-4 py-2 text-gray-600 font-semibold mt-3">Tags</div>
 
-                            <div className="grid grid-cols-3 gap-2 px-4">
-                                <div className="bg-green-200 px-2 py-1 rounded-md text-center text-sm">
+                            <div className="flex gap-2 px-4 overflow-hidden min-w-0">
+                                <div className="bg-green-200 px-2 py-1 rounded-md text-center text-sm whitespace-nowrap shrink-0">
                                     Tag 1
                                 </div>
-                                <div className="bg-red2 px-2 py-1 rounded-md text-center text-sm">
+                                <div className="bg-red2 px-2 py-1 rounded-md text-center text-sm whitespace-nowrap shrink-0">
                                     Tag 2
                                 </div>
-                                <div className="bg-blue-200 px-2 py-1 rounded-md text-center text-sm">
+                                <div className="bg-blue-200 px-2 py-1 rounded-md text-center text-sm whitespace-nowrap shrink-0">
                                     Tag 3
                                 </div>
 
-
                             </div>
-                            <div className="border border-dashed border-gray-400 px-2 py-1 w-[50%] ml-4 mt-5 rounded-md text-center text-sm text-gray-600 cursor-pointer">
+
+                            <div className="whitespace-nowrap shrink-0 border border-dashed border-gray-400 px-2 py-1 w-[80%] ml-4 mt-5 rounded-md text-center text-sm text-gray-600 cursor-pointer">
                                 + Add Tag
                             </div>
                         </div>
+
 
 
                         <MenuItem
